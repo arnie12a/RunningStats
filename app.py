@@ -12,7 +12,7 @@ if not os.path.exists(CSV_FILE):
         writer = csv.writer(file)
         writer.writerow([
             "Date", "WeekNumber", "DayOfWeek", "WorkoutType", "Distance",
-            "Time", "AveragePace", "Location", "Weather", "Effort", "Notes"
+            "Time", "AveragePace", "Calories", "Location", "Weather", "Effort", "Notes"
         ])
 
 @app.route("/", methods=["GET", "POST"])
@@ -26,6 +26,7 @@ def index():
             request.form.get("Distance"),
             request.form.get("Time"),
             request.form.get("AveragePace"),
+            request.form.get("Calories"),
             request.form.get("Location"),
             request.form.get("Weather"),
             request.form.get("Effort"),
