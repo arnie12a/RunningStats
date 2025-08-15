@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import plotly.express as px
+import matplotlib.pyplot as plt
 
 st.title("Marathon Training Dashboard")
 
@@ -22,22 +22,45 @@ col1.metric("Total Miles", f"{total_distance:.2f}")
 col2.metric("Total Calories", int(total_calories))
 col3.metric("Avg Effort", f"{avg_effort:.1f}")
 
-# Line Chart — Mileage over time using Plotly
-st.subheader("Mileage Over Time")
+# 1 — Daily Mileage over Time
+st.subheader("Daily Mileage Over Time")
 df_sorted = df.sort_values("Date")
-fig = px.line(df_sorted, x="Date", y="Distance", markers=True,
-              title="Daily Distance")
-st.plotly_chart(fig)
+plt.figure(figsize=(10,4))
+plt.plot(df_sorted["Date"], df_sorted["Distance"], marker='o', linestyle='-')
+plt.xlabel("Date")
+plt.ylabel("Distance (miles)")
+plt.title("Daily Distance Over Time")
+plt.grid(True)
+st.pyplot(plt)
 
-# Bar Chart — Mileage by Day of Week
+# 2 — Average Distance by Day of Week
 st.subheader("Average Distance by Day of Week")
-distance_by_day = df.groupby("DayOfWeek")["Distance"].mean().reset_index()
-fig2 = px.bar(distance_by_day, x="DayOfWeek", y="Distance",
-              title="Average Distance per Day")
-st.plotly_chart(fig2)
+distance_by_day = df.groupby("DayOfWeek")["Distance"].mean()
+plt.figure(figsize=(8,4))
+distance_by_day = distance_by_day.reindex(["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"])
+plt.bar(distance_by_day.index, distance_by_day.values, color='skyblue')
+plt.ylabel("Average Distance (miles)")
+plt.title("Average Distance per Day of Week")
+plt.xticks(rotation=45)
+st.pyplot(plt)
 
-# Scatter — Effort vs Distance (how hard were the runs?)
+# 3 — Effort vs Distance Scatter
 st.subheader("Effort vs Distance")
-fig3 = px.scatter(df, x="Distance", y="Effort", hover_data=["Notes"],
-                  title="Effort vs Distance")
-st.plotly_chart(fig3)
+plt.figure(figsize=(8,5))
+plt.scatter(df["Distance"], df["Effort"], c='orange')
+plt.xlabel("Distance (miles)")
+plt.ylabel("Effort")
+plt.title("Effort vs Distance")
+plt.grid(True)
+st.pyplot(plt)
+
+# 4 — Optional: Weekly Total Mileage
+st.subheader("Weekly Total Mileage")
+df["WeekNumber"] = df["WeekNumber"].astype(int)
+weekly_mileage = df.groupby("WeekNumber")["Distance"].sum()
+plt.figure(figsize=(8,4))
+plt.bar(weekly_mileage.index, weekly_mileage.values, color='green')
+plt.xlabel("Week Number")
+plt.ylabel("Total Distance (miles)")
+plt.title("Total Weekly Mileage")
+st.pyplot(plt)
