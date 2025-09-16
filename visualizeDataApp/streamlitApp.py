@@ -27,6 +27,9 @@ weekly_compare['PercentOfGoal'] = (
     weekly_compare['ActualMileage'] / weekly_compare['WeeklyMilage'] * 100
 ).round(1)
 
+cols = ['WeekNumber', 'WeeklyMilage', 'ActualMileage', 'PercentOfGoal']
+weekly_compare = weekly_compare[cols]
+
 st.dataframe(weekly_compare)
 
 fig_compare = px.bar(
