@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Marathon Training Log</title>
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10">
+                <div class="card shadow-lg border-0">
+                    <div class="card-header bg-primary text-white text-center">
+                        <h2 class="mb-0">🏃 Marathon Training Log</h2>
+                    </div>
+                    <div class="card-body p-4">
+                        <form method="POST" class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Date</label>
+                                <input type="date" name="Date" class="form-control" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Week Number</label>
+                                <input type="number" name="WeekNumber" class="form-control" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Day of Week</label>
+                                <select name="DayOfWeek" class="form-select" required>
+                                    <option value="">Select...</option>
+                                    <option>Monday</option>
+                                    <option>Tuesday</option>
+                                    <option>Wednesday</option>
+                                    <option>Thursday</option>
+                                    <option>Friday</option>
+                                    <option>Saturday</option>
+                                    <option>Sunday</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Workout Type</label>
+                                <input type="text" name="WorkoutType" class="form-control" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Distance (miles)</label>
+                                <input type="number" step="0.01" name="Distance" class="form-control" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Time (HH:MM:SS)</label>
+                                <input type="text" name="Time" class="form-control" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Average Pace (min/mile)</label>
+                                <input type="text" name="AveragePace" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Calories</label>
+                                <input type="number" min="1"  name="Calories" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Location</label>
+                                <input type="text" name="Location" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Weather</label>
+                                <input type="text" name="Weather" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Effort (1–10)</label>
+                                <input type="number" min="1" max="10" name="Effort" class="form-control">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Notes</label>
+                                <textarea name="Notes" class="form-control" rows="3"></textarea>
+                            </div>
+                            <div class="col-12 text-center">
+                                <button type="submit" class="btn btn-success btn-lg px-5">Save Workout</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
