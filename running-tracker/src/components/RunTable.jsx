@@ -1,17 +1,12 @@
 import React, { useEffect, useState } from "react";
-import Papa from "papaparse";
 
 const RunTable = () => {
   const [runs, setRuns] = useState([]);
 
   useEffect(() => {
-    Papa.parse("/runs.csv", {
-      download: true,
-      header: true,
-      complete: (result) => {
-        setRuns(result.data);
-      },
-    });
+    fetch("/runs.json")
+      .then((res) => res.json())
+      .then((data) => setRuns(data));
   }, []);
 
   return (

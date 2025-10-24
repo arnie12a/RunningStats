@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
-import Papa from "papaparse";
 import {
   Chart as ChartJS,
   LineElement,
@@ -18,12 +17,11 @@ const RunChart = () => {
   const [chartData, setChartData] = useState(null);
 
   useEffect(() => {
-    Papa.parse("/runs.csv", {
-      download: true,
-      header: true,
-      complete: (result) => {
-        const labels = result.data.map((row) => row.Date);
-        const miles = result.data.map((row) => parseFloat(row.Distance));
+    fetch("/runs.json")
+      .then((res) => res.json())
+      .then((data) => {
+        const labels = data.map((row) => row.Date);
+        const miles = data.map((row) => parseFloat(row.Distance));
         setChartData({
           labels,
           datasets: [
@@ -36,8 +34,7 @@ const RunChart = () => {
             },
           ],
         });
-      },
-    });
+      });
   }, []);
 
   if (!chartData) return <p>Loading chart...</p>;
